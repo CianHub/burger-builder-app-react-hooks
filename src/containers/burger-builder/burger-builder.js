@@ -3,7 +3,7 @@ import { Wrapper } from '../../components/Wrapper/wrapper';
 import { Burger } from '../../components/Burger/burger';
 import { BuildControls } from '../../components/Burger/BuildControls/buildControls';
 
-const INGREDIENT_PRICES = { salad: 0.5, cheese: 0.5, meat: 0.3, salad: 2 };
+const INGREDIENT_PRICES = { salad: 0.5, cheese: 0.5, meat: 0.3, bacon: 2 };
 
 export class BurgerBuilder extends Component {
   constructor(props) {
@@ -60,6 +60,7 @@ export class BurgerBuilder extends Component {
           added={this.addIngredientHandler}
           removed={this.removeIngredientHandler}
           disabled={disabledInfo}
+          price={this.state.totalPrice}
         />
       </Wrapper>
     );
