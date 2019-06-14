@@ -15,7 +15,9 @@ export const BuildControls = props => (
       <BuildControl
         key={control.label}
         label={control.label}
-        type={control.type}
+        added={() => props.added(control.type)}
+        removed={() => props.removed(control.type)}
+        disabled={props.disabled[control.type]}
       />
     ))}
   </div>
