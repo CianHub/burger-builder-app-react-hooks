@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import { Wrapper } from "../../components/Wrapper/wrapper";
-import { Burger } from "../../components/Burger/burger";
+import React, { Component } from 'react';
+import { Wrapper } from '../../components/Wrapper/wrapper';
+import { Burger } from '../../components/Burger/burger';
+import { BuildControls } from '../../components/Burger/BuildControls/buildControls';
 
 export class BurgerBuilder extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export class BurgerBuilder extends Component {
     return (
       <Wrapper>
         <Burger ingredients={this.state.ingredients} />
-        <div>Build Controls</div>
+        <BuildControls />
       </Wrapper>
     );
   }
