@@ -6,7 +6,7 @@ import { Logo } from '../Logo/logo';
 export const Navbar = props => (
   <header className={styles.Navbar}>
     <div>MENU</div>
-    <Logo />
+    <Logo height="80%" />
     <nav>
       <NavigationItems />
     </nav>
