@@ -7,7 +7,7 @@ export const Navbar = props => (
   <header className={styles.Navbar}>
     <div>MENU</div>
     <Logo height="80%" />
-    <nav>
+    <nav className={styles.DesktopOnly}>
       <NavigationItems />
     </nav>
   </header>
