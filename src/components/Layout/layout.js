@@ -14,10 +14,17 @@ export class Layout extends Component {
   sideDrawerClosed = () => {
     this.setState({ showSideDrawer: false });
   };
+
+  sideDrawerToggle = () => {
+    this.setState(prevState => {
+      return { showSideDrawer: !prevState.showSideDrawer };
+    });
+  };
+
   render() {
     return (
       <Wrapper>
-        <Navbar />
+        <Navbar drawerToggleClicked={this.sideDrawerToggle} />
         <Sidedrawer
           open={this.state.showSideDrawer}
           closed={this.sideDrawerClosed}

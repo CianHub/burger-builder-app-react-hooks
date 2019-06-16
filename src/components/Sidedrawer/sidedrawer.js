@@ -14,7 +14,7 @@ export const Sidedrawer = props => {
   return (
     <Wrapper>
       <Backdrop show={props.open} clicked={props.closed} />
-      <div className={styles.Sidedrawer}>
+      <div className={attachedClasses.join(' ')}>
         <div className={styles.Logo}>
           <Logo />
         </div>
