@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
-import { Wrapper } from '../Wrapper/wrapper';
-import styles from './layout.module.css';
-import { Navbar } from '../navbar/navbar';
-import { Sidedrawer } from '../Sidedrawer/sidedrawer';
+import React, { Component } from "react";
+import { Wrapper } from "../Wrapper/wrapper";
+import styles from "./layout.module.css";
+import { Navbar } from "../navbar/navbar";
+import { Sidedrawer } from "../Sidedrawer/sidedrawer";
 
 export class Layout extends Component {
-  constructor(props) {
-    super(props);
-  }
   state = {
     showSideDrawer: true
   };
