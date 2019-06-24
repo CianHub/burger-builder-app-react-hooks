@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { Layout } from "./components/Layout/layout";
-import { BurgerBuilder } from "./containers/burger-builder/burger-builder";
+import BurgerBuilder from "./containers/burger-builder/burger-builder";
 import Checkout from "./containers/Checkout/checkout";
 import { Route, Switch } from "react-router-dom";
 

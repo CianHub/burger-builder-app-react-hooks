@@ -1,8 +1,9 @@
-import React from 'react';
-import styles from './burger.module.css';
-import { Ingredient } from './Ingredients/ingredient';
+import React from "react";
 
-export const Burger = props => {
+import styles from "./burger.module.css";
+import { Ingredient } from "./Ingredients/ingredient";
+
+const Burger = props => {
   let transformIngredients = Object.keys(props.ingredients)
     .map(ingKey => {
       return [...Array(props.ingredients[ingKey])].map((_, i) => {
@@ -24,3 +25,5 @@ export const Burger = props => {
     </div>
   );
 };
+
+export default Burger;

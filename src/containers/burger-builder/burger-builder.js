@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Wrapper } from "../../components/Wrapper/wrapper";
-import { Burger } from "../../components/Burger/burger";
+import Burger from "../../components/Burger/burger";
 import { BuildControls } from "../../components/Burger/BuildControls/buildControls";
 import { Modal } from "../../components/ui/Modal/modal";
 import { OrderSummary } from "../../components/Burger/OrderSummary/orderSummary";
@@ -34,7 +34,7 @@ class BurgerBuilder extends Component {
 
   purchaseContinueHandler = () => {
     this.setState({ loading: true });
-    const order = {
+    /* const order = {
       ingredients: this.state.ingredients,
       price: this.state.totalPrice,
       customer: {
@@ -54,7 +54,22 @@ class BurgerBuilder extends Component {
       .then(response => {
         this.setState({ loading: false, purchasing: false });
       })
-      .catch(error => this.setState({ loading: false, purchasing: false }));
+      .catch(error => this.setState({ loading: false, purchasing: false })); */
+
+    const queryParams = [];
+    for (let i in this.state.ingredients) {
+      queryParams.push(
+        encodeURIComponent(i) +
+          "=" +
+          encodeURIComponent(this.state.ingredients[i])
+      );
+    }
+
+    const queryString = queryParams.join("&");
+    this.props.history.push({
+      pathname: "/checkout",
+      search: "?=" + queryString
+    });
   };
 
   updatePurchaseState = ingredients => {
