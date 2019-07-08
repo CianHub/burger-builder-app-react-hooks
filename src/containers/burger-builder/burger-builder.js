@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Wrapper } from "../../components/Wrapper/wrapper";
-import Burger from "../../components/Burger/burger";
-import { BuildControls } from "../../components/Burger/BuildControls/buildControls";
+import Burger from "../../components/Burger/Burger";
+import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import { Modal } from "../../components/ui/Modal/modal";
 import { OrderSummary } from "../../components/Burger/OrderSummary/orderSummary";
 import { instance } from "../../axios-orders";
