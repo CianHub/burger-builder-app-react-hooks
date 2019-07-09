@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Button from "../../../components/ui/button/Button";
-import Spinner from "../../../components/ui/spinner/Spinner";
+import Button from "../../../components/ui/button/button";
+import Spinner from "../../../components/ui/spinner/spinner";
 import classes from "./contactData.module.css";
 import { instance } from "../../../axios-orders";
 

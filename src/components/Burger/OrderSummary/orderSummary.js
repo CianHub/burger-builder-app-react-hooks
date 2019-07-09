@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { Wrapper } from "../../Wrapper/wrapper";
-import Button from "../../../components/ui/button/Button";
+import Button from "../../../components/ui/button/button";
 
 class OrderSummary extends Component {
   // This could be a functional component, doesn't have to be a class

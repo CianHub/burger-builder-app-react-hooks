@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Wrapper } from "../../components/Wrapper/wrapper";
-import Burger from "../../components/Burger/Burger";
-import BuildControls from "../../components/Burger/BuildControls/BuildControls";
-import Modal from "../../components/ui/Modal/Modal";
-import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
+import Burger from "../../components/Burger/burger";
+import BuildControls from "../../components/Burger/BuildControls/buildControls";
+import Modal from "../../components/ui/Modal/modal";
+import OrderSummary from "../../components/Burger/OrderSummary/orderSummary";
 import { instance } from "../../axios-orders";
-import Spinner from "../../components/ui/spinner/Spinner";
+import Spinner from "../../components/ui/spinner/spinner";
 import { withErrorHandler } from "../../components/withErrorHandler/withErrorHandler";
 
 const INGREDIENT_PRICES = { salad: 0.5, cheese: 0.5, meat: 0.3, bacon: 2 };

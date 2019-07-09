@@ -1,9 +1,9 @@
 import React from "react";
 
-import Logo from "../../Logo/Logo";
+import Logo from "../../Logo/logo";
 import NavigationItems from "../NavigationItems/NavigationItems";
 import classes from "./sideDrawer.module.css";
-import Backdrop from "../../ui/Backdrop/Backdrop";
+import Backdrop from "../../ui/Backdrop/backdrop";
 import { Wrapper } from "../../Wrapper/wrapper";
 
 const sideDrawer = props => {
