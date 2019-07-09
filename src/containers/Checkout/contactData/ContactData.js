@@ -52,24 +52,27 @@ class ContactData extends Component {
           ]
         },
         value: "",
-        validation: { required: true },
         valid: false
       }
     },
+    formIsValid: false,
 
     loading: false
   };
 
   checkValidity(value, rules) {
-    let isValid = false;
+    let isValid = true;
+
     if (rules.required) {
       isValid = value.trim() !== "" && isValid;
     }
+
     if (rules.minLength) {
-      isValid = value.trim().length >= rules.minLength && isValid;
+      isValid = value.length >= rules.minLength && isValid;
     }
+
     if (rules.maxLength) {
-      isValid = value.trim().length <= rules.maxLength && isValid;
+      isValid = value.length <= rules.maxLength && isValid;
     }
 
     return isValid;
@@ -101,15 +104,25 @@ class ContactData extends Component {
   };
 
   inputChangedHandler = (event, inputIdentifier) => {
-    const form = { ...this.state.orderForm };
-    const formElement = { ...form[inputIdentifier] };
-    formElement.value = event.target.value;
-    formElement.valid = this.checkValidity(
-      formElement.value,
-      formElement.validation
+    const updatedOrderForm = {
+      ...this.state.orderForm
+    };
+    const updatedFormElement = {
+      ...updatedOrderForm[inputIdentifier]
+    };
+    updatedFormElement.value = event.target.value;
+    updatedFormElement.valid = this.checkValidity(
+      updatedFormElement.value,
+      updatedFormElement.validation
     );
-    form[inputIdentifier] = formElement;
-    this.setState({ orderForm: form });
+    updatedFormElement.touched = true;
+    updatedOrderForm[inputIdentifier] = updatedFormElement;
+
+    let formIsValid = true;
+    for (let inputIdentifier in updatedOrderForm) {
+      formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+    }
+    this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
   };
 
   render() {
@@ -129,6 +142,8 @@ class ContactData extends Component {
             elementConfig={formElement.config.elementConfig}
             value={formElement.config.value}
             changed={event => this.inputChangedHandler(event, formElement.id)}
+            invalid={!formElement.config.valid}
+            touched={formElement.config.validation}
           />
         ))}
         <Button btnType="Success">ORDER</Button>
