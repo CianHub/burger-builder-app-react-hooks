@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import styles from "./modal.module.css";
-import { Wrapper } from "../../Wrapper/wrapper";
-import { Backdrop } from "../Backdrop/backdrop";
 
-export class Modal extends Component {
+import classes from "./modal.module.css";
+import { Wrapper } from "../../Wrapper/wrapper";
+import Backdrop from "../Backdrop/Backdrop";
+
+class Modal extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     return (
       nextProps.show !== this.props.show ||
@@ -11,12 +12,16 @@ export class Modal extends Component {
     );
   }
 
+  componentWillUpdate() {
+    console.log("[Modal] WillUpdate");
+  }
+
   render() {
     return (
       <Wrapper>
         <Backdrop show={this.props.show} clicked={this.props.modalClosed} />
         <div
-          className={styles.Modal}
+          className={classes.Modal}
           style={{
             transform: this.props.show ? "translateY(0)" : "translateY(-100vh)",
             opacity: this.props.show ? "1" : "0"
@@ -28,3 +33,5 @@ export class Modal extends Component {
     );
   }
 }
+
+export default Modal;

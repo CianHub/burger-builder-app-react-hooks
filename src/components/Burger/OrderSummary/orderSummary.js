@@ -1,38 +1,42 @@
-import React, { Component } from 'react';
-import { Wrapper } from '../../Wrapper/wrapper';
-import { Button } from '../../ui/button/button';
+import React, { Component } from "react";
 
-export class OrderSummary extends Component {
+import { Wrapper } from "../../Wrapper/wrapper";
+import Button from "../../../components/ui/button/Button";
+
+class OrderSummary extends Component {
+  // This could be a functional component, doesn't have to be a class
   componentWillUpdate() {
-    console.log('OrderSummary Update');
+    console.log("[OrderSummary] WillUpdate");
   }
 
   render() {
-    const ingredientSummary = Object.keys(this.props.ingredients).map(
-      (key, index) => (
-        <li key={key + index}>
-          <span style={{ textTransform: 'capitalize' }}>
-            {key}: {this.props.ingredients[key]}
-          </span>
+    const ingredientSummary = Object.keys(this.props.ingredients).map(igKey => {
+      return (
+        <li key={igKey}>
+          <span style={{ textTransform: "capitalize" }}>{igKey}</span>:{" "}
+          {this.props.ingredients[igKey]}
         </li>
-      )
-    );
+      );
+    });
+
     return (
       <Wrapper>
         <h3>Your Order</h3>
-        <p> A delicious burger with the following ingredients:</p>
+        <p>A delicious burger with the following ingredients:</p>
         <ul>{ingredientSummary}</ul>
         <p>
-          <strong>Total Price: {this.props.totalPrice.toFixed(2)}</strong>
+          <strong>Total Price: {this.props.price.toFixed(2)}</strong>
         </p>
         <p>Continue to Checkout?</p>
-        <Button clicked={this.props.purchaseCancelled} btnType={'Danger'}>
+        <Button btnType="Danger" clicked={this.props.purchaseCancelled}>
           CANCEL
         </Button>
-        <Button clicked={this.props.purchaseContinued} btnType={'Success'}>
+        <Button btnType="Success" clicked={this.props.purchaseContinued}>
           CONTINUE
         </Button>
       </Wrapper>
     );
   }
 }
+
+export default OrderSummary;
