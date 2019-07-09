@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-
-import { Button } from "../../components/ui/button/Button";
-import Spinner from "../../../components/ui/Spinner/Spinner";
-import classes from "./ContactData.css";
+import Button from "../../../components/ui/button/Button";
+import Spinner from "../../../components/ui/spinner/Spinner";
+import classes from "./contactData.module.css";
 import { instance } from "../../../axios-orders";
 
 class ContactData extends Component {
@@ -23,18 +22,18 @@ class ContactData extends Component {
       ingredients: this.props.ingredients,
       price: this.props.price,
       customer: {
-        name: "Max Schwarzmüller",
+        name: "Test",
         address: {
           street: "Teststreet 1",
-          zipCode: "41351",
-          country: "Germany"
+          zipCode: "1",
+          country: "TEst "
         },
         email: "test@test.com"
       },
       deliveryMethod: "fastest"
     };
     instance
-      .post("/orders.json", order)
+      .post("orders.json", order)
       .then(response => {
         this.setState({ loading: false });
         this.props.history.push("/");

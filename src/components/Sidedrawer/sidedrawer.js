@@ -1,6 +1,6 @@
 import React from "react";
-import { Logo } from "../Logo/logo";
-import { NavigationItems } from "../Navigation/navigation";
+import Logo from "../Logo/Logo";
+import NavigationItems from "../Navigation/NavigationItems/NavigationItems";
 import styles from "./sidedrawer.module.css";
 import { Wrapper } from "../Wrapper/wrapper";
 import Backdrop from "../../components/ui/Backdrop/Backdrop";

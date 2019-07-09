@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./Backdrop.css";
+import classes from "./backdrop.module.css";
 
 const Backdrop = props =>
   props.show ? (
