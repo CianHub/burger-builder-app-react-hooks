@@ -4,9 +4,16 @@ import styles from "./input.module.css";
 const Input = props => {
   let inputElement = null;
   const inputClasses = [styles.InputElement];
+  let errorText = null;
 
-  if (props.invalid && props.touched) {
+  if (props.invalid && props.touched && props.shouldValidate) {
     inputClasses.push(styles.Invalid);
+    errorText = (
+      <p style={{ color: "red" }}>
+        This field is invalid, please enter a valid{" "}
+        {props.valueType.toLowerCase()}
+      </p>
+    );
   }
   switch (props.elementType) {
     case "input":
@@ -57,6 +64,7 @@ const Input = props => {
     <div className={styles.Input}>
       <label className={styles.Label}>{props.label}</label>
       {inputElement}
+      {errorText}
     </div>
   );
 };

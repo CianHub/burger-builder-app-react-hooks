@@ -13,35 +13,45 @@ class ContactData extends Component {
         elementConfig: { type: "text", placeholder: "Name" },
         value: "",
         validation: { required: true },
-        valid: false
+        valid: false,
+        touched: false,
+        valueType: "Name"
       },
       street: {
         elementType: "input",
         elementConfig: { type: "text", placeholder: "Street" },
         value: "",
         validation: { required: true },
-        valid: false
+        valid: false,
+        touched: false,
+        valueType: "Street"
       },
       zipCode: {
         elementType: "input",
         elementConfig: { type: "text", placeholder: "Zip Code" },
         value: "",
         validation: { required: true, minLength: 5, maxLength: 10 },
-        valid: false
+        valid: false,
+        touched: false,
+        valueType: "Zip Code"
       },
       country: {
         elementType: "input",
         elementConfig: { type: "text", placeholder: "Country" },
         value: "",
         validation: { required: true },
-        valid: false
+        valid: false,
+        touched: false,
+        valueType: "Country"
       },
       email: {
         elementType: "input",
         elementConfig: { type: "email", placeholder: "Email" },
         value: "",
         validation: { required: true },
-        valid: false
+        valid: false,
+        touched: false,
+        valueType: "Email Address"
       },
       deliveryMethod: {
         elementType: "select",
@@ -51,8 +61,10 @@ class ContactData extends Component {
             { value: "cheapest", displayValue: "Cheapest" }
           ]
         },
-        value: "",
-        valid: false
+        value: "fastest",
+        valid: true,
+        validation: {},
+        valueType: "Delivery Method"
       }
     },
     formIsValid: false,
@@ -62,6 +74,10 @@ class ContactData extends Component {
 
   checkValidity(value, rules) {
     let isValid = true;
+
+    if (!rules) {
+      return true;
+    }
 
     if (rules.required) {
       isValid = value.trim() !== "" && isValid;
@@ -143,10 +159,14 @@ class ContactData extends Component {
             value={formElement.config.value}
             changed={event => this.inputChangedHandler(event, formElement.id)}
             invalid={!formElement.config.valid}
-            touched={formElement.config.validation}
+            shouldValidate={formElement.config.validation}
+            touched={formElement.config.touched}
+            valueType={formElement.config.valueType}
           />
         ))}
-        <Button btnType="Success">ORDER</Button>
+        <Button btnType="Success" disabled={!this.state.formIsValid}>
+          ORDER
+        </Button>
       </form>
     );
     if (this.state.loading) {
