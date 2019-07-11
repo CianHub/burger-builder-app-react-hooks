@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import { Wrapper } from "../../components/Wrapper/wrapper";
-import { Burger } from "../../components/Burger/burger";
-import { BuildControls } from "../../components/Burger/BuildControls/buildControls";
-import { Modal } from "../../components/ui/Modal/modal";
-import { OrderSummary } from "../../components/Burger/OrderSummary/orderSummary";
+import Burger from "../../components/Burger/burger";
+import BuildControls from "../../components/Burger/BuildControls/buildControls";
+import Modal from "../../components/ui/Modal/modal";
+import OrderSummary from "../../components/Burger/OrderSummary/orderSummary";
 import { instance } from "../../axios-orders";
-import { Spinner } from "../../components/ui/spinner/spinner";
+import Spinner from "../../components/ui/spinner/spinner";
 import { withErrorHandler } from "../../components/withErrorHandler/withErrorHandler";
 
 const INGREDIENT_PRICES = { salad: 0.5, cheese: 0.5, meat: 0.3, bacon: 2 };
 class BurgerBuilder extends Component {
   state = {
     ingredients: null,
-    totalPrice: 4,
+    price: 4,
     purchaseable: false,
     purchasing: false,
     loading: false,
@@ -34,9 +34,9 @@ class BurgerBuilder extends Component {
 
   purchaseContinueHandler = () => {
     this.setState({ loading: true });
-    const order = {
+    /* const order = {
       ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
+      price: this.state.price,
       customer: {
         name: "Cian",
         address: {
@@ -54,7 +54,22 @@ class BurgerBuilder extends Component {
       .then(response => {
         this.setState({ loading: false, purchasing: false });
       })
-      .catch(error => this.setState({ loading: false, purchasing: false }));
+      .catch(error => this.setState({ loading: false, purchasing: false })); */
+
+    const queryParams = [];
+    for (let i in this.state.ingredients) {
+      queryParams.push(
+        encodeURIComponent(i) +
+          "=" +
+          encodeURIComponent(this.state.ingredients[i])
+      );
+    }
+
+    const queryString = queryParams.join("&");
+    this.props.history.push({
+      pathname: "/checkout",
+      search: "?" + queryString
+    });
   };
 
   updatePurchaseState = ingredients => {
@@ -79,9 +94,9 @@ class BurgerBuilder extends Component {
     const updatedIngredients = { ...this.state.ingredients };
     updatedIngredients[type] = newCount;
     const priceAddition = INGREDIENT_PRICES[type];
-    const oldPrice = this.state.totalPrice;
+    const oldPrice = this.state.price;
     const newPrice = oldPrice + priceAddition;
-    this.setState({ ingredients: updatedIngredients, totalPrice: newPrice });
+    this.setState({ ingredients: updatedIngredients, price: newPrice });
     this.updatePurchaseState(updatedIngredients);
   };
 
@@ -94,9 +109,9 @@ class BurgerBuilder extends Component {
     const updatedIngredients = { ...this.state.ingredients };
     updatedIngredients[type] = newCount;
     const priceAddition = INGREDIENT_PRICES[type];
-    const oldPrice = this.state.totalPrice;
+    const oldPrice = this.state.price;
     const newPrice = oldPrice - priceAddition;
-    this.setState({ ingredients: updatedIngredients, totalPrice: newPrice });
+    this.setState({ ingredients: updatedIngredients, price: newPrice });
     this.updatePurchaseState(updatedIngredients);
   };
 
@@ -124,8 +139,8 @@ class BurgerBuilder extends Component {
             added={this.addIngredientHandler}
             removed={this.removeIngredientHandler}
             disabled={disabledInfo}
-            price={this.state.totalPrice}
-            purchaseable={this.state.purchaseable}
+            price={this.state.price}
+            purchasable={this.state.purchaseable}
             ordered={this.purchaseHandler}
           />
         </Wrapper>
@@ -136,7 +151,7 @@ class BurgerBuilder extends Component {
           purchaseCancelled={this.purchaseCancelHandler}
           purchaseContinued={this.purchaseContinueHandler}
           ingredients={this.state.ingredients}
-          totalPrice={this.state.totalPrice}
+          price={this.state.price}
         />
       );
     }

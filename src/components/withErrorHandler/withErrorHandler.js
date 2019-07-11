@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal } from "../ui/Modal/modal";
+import Modal from "../ui/Modal/modal";
 import { Wrapper } from "../Wrapper/wrapper";
 
 export const withErrorHandler = (WrappedComponent, axios) => {
