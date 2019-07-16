@@ -32,40 +32,8 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
-    this.setState({ loading: true });
-    const order = {
-      ingredients: this.props.ings,
-      price: this.props.price,
-      customer: {
-        name: "Cian",
-        address: {
-          street: "Teststreet 1",
-          zipCode: "41351",
-          country: "Germany"
-        },
-        email: "test@test.com"
-      },
-      deliveryMethod: "fastest"
-    };
-
-    instance
-      .post("/orders.json", order)
-      .then(response => {
-        this.setState({ loading: false, purchasing: false });
-      })
-      .catch(error => this.setState({ loading: false, purchasing: false }));
-
-    const queryParams = [];
-    for (let i in this.props.ings) {
-      queryParams.push(
-        encodeURIComponent(i) + "=" + encodeURIComponent(this.props.ings[i])
-      );
-    }
-
-    const queryString = queryParams.join("&");
     this.props.history.push({
-      pathname: "/checkout",
-      search: "?" + queryString
+      pathname: "/checkout"
     });
   };
 
@@ -77,6 +45,7 @@ class BurgerBuilder extends Component {
       .reduce((sum, el) => {
         return sum + el;
       }, 0);
+    return sum > 0;
   };
 
   purchaseHandler = () => {
