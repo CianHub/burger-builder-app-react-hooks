@@ -1,25 +1,26 @@
 import React, { Component } from "react";
 import Modal from "../ui/Modal/modal";
 import { Wrapper } from "../Wrapper/wrapper";
+import { instance } from "../../axios-orders";
 
 export const withErrorHandler = (WrappedComponent, axios) => {
   return class extends Component {
     state = { error: null };
 
     componentWillMount() {
-      this.reqInterceptor = axios.interceptors.request.use(req => {
+      this.reqInterceptor = instance.interceptors.request.use(req => {
         this.setState({ error: null });
         return req;
       });
 
-      this.resInterceptor = axios.interceptors.response.use(null, error => {
+      this.resInterceptor = instance.interceptors.response.use(null, error => {
         this.setState({ error: error });
       });
     }
 
     componentWillUnmount() {
-      axios.interceptors.request.eject(this.reqInterceptor);
-      axios.interceptors.response.eject(this.resInterceptor);
+      instance.interceptors.request.eject(this.reqInterceptor);
+      instance.interceptors.response.eject(this.resInterceptor);
     }
 
     errorConfirmedHandler = () => this.setState({ error: null });
