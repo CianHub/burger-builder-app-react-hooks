@@ -97,7 +97,6 @@ class ContactData extends Component {
 
   orderHandler = event => {
     event.preventDefault();
-    this.setState({ loading: true });
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
       formData[formElementIdentifier] = this.state.orderForm[
@@ -176,10 +175,9 @@ class ContactData extends Component {
 
 const mapStateToProps = state => {
   return {
-    ingredients: state.ingredients,
-    price: state.price,
-    error: state.error,
-    loading: state.loading
+    ingredients: state.burgerBuilder.ingredients,
+    price: state.burgerBuilder.price,
+    loading: state.orders.loading
   };
 };
 

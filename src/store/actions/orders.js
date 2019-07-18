@@ -5,7 +5,8 @@ export const purchaseBurgerSuccess = (orderId, orderData) => {
   return {
     type: actions.PURCHASE_BURGER_SUCCESS,
     orderId,
-    orderData
+    orderData,
+    purchased: true
   };
 };
 
@@ -28,10 +29,17 @@ export const purchaseBurger = orderData => {
     instance
       .post("orders.json", orderData)
       .then(response => {
-        dispatch(purchaseBurgerSuccess(response.data, orderData));
+        console.log(response.data);
+        dispatch(purchaseBurgerSuccess(response.data.name, orderData));
       })
       .catch(error => {
         dispatch(purchaseBurgerFail(error));
       });
+  };
+};
+
+export const purchaseInit = () => {
+  return {
+    type: actions.PURCHASE_INIT
   };
 };
