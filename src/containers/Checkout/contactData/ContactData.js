@@ -70,9 +70,7 @@ class ContactData extends Component {
         valueType: "Delivery Method"
       }
     },
-    formIsValid: false,
-
-    loading: false
+    formIsValid: false
   };
 
   checkValidity(value, rules) {
@@ -164,7 +162,7 @@ class ContactData extends Component {
         </Button>
       </form>
     );
-    if (this.state.loading) {
+    if (this.props.loading) {
       form = <Spinner />;
     }
     return (
@@ -180,14 +178,14 @@ const mapStateToProps = state => {
   return {
     ingredients: state.ingredients,
     price: state.price,
-    error: state.error
+    error: state.error,
+    loading: state.loading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onPurchaseBurger: orderData =>
-      dispatch(actions.purchaseBurgerStart(orderData))
+    onPurchaseBurger: orderData => dispatch(actions.purchaseBurger(orderData))
   };
 };
 

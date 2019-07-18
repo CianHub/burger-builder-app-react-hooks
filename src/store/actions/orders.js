@@ -16,8 +16,15 @@ export const purchaseBurgerFail = error => {
   };
 };
 
-export const purchaseBurgerStart = orderData => {
+export const purchaseBurgerStart = () => {
+  return {
+    type: actions.PURCHASE_BURGER_START
+  };
+};
+
+export const purchaseBurger = orderData => {
   return dispatch => {
+    dispatch(purchaseBurgerStart());
     instance
       .post("orders.json", orderData)
       .then(response => {
