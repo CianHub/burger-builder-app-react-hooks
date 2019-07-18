@@ -5,6 +5,8 @@ import classes from "./contactData.module.css";
 import { instance } from "../../../axios-orders";
 import Input from "../../../components/ui/input/Input";
 import { connect } from "react-redux";
+import * as actions from "../../../store/actions/index";
+import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
 
 class ContactData extends Component {
   state = {
@@ -109,15 +111,7 @@ class ContactData extends Component {
       price: this.props.price,
       orderData: formData
     };
-    instance
-      .post("orders.json", order)
-      .then(response => {
-        this.setState({ loading: false });
-        this.props.history.push("/");
-      })
-      .catch(error => {
-        this.setState({ loading: false });
-      });
+    this.props.onPurchaseBurger(order);
   };
 
   inputChangedHandler = (event, inputIdentifier) => {
@@ -185,8 +179,19 @@ class ContactData extends Component {
 const mapStateToProps = state => {
   return {
     ingredients: state.ingredients,
-    price: state.price
+    price: state.price,
+    error: state.error
   };
 };
 
-export default connect(mapStateToProps)(ContactData);
+const mapDispatchToProps = dispatch => {
+  return {
+    onPurchaseBurger: orderData =>
+      dispatch(actions.purchaseBurgerStart(orderData))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(ContactData, instance));

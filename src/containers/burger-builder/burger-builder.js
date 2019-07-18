@@ -8,6 +8,7 @@ import Spinner from "../../components/ui/spinner/spinner";
 import { withErrorHandler } from "../../components/withErrorHandler/withErrorHandler";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+import { instance } from "../../axios-orders";
 
 class BurgerBuilder extends Component {
   state = {
@@ -116,4 +117,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withErrorHandler(BurgerBuilder));
+)(withErrorHandler(BurgerBuilder, instance));
