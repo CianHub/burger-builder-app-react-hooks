@@ -1,4 +1,4 @@
-import * as ACTIONS from "./../actions/actions";
+import * as ACTIONS from "../actions/actions";
 
 const initialState = {
   ingredients: { salad: 0, bacon: 0, cheese: 0, meat: 0 },
