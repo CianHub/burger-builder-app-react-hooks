@@ -26,6 +26,8 @@ const authReducer = (state = initialState, action) => {
         error: action.error,
         loading: false
       };
+    case actions.LOGOUT:
+      return { ...state, token: null, userId: null };
     default:
       return { ...state };
   }
