@@ -4,10 +4,7 @@ import { Wrapper } from "../../Wrapper/wrapper";
 import Button from "../../../components/ui/button/button";
 
 class OrderSummary extends Component {
-  // This could be a functional component, doesn't have to be a class
-  componentWillUpdate() {
-    console.log("[OrderSummary] WillUpdate");
-  }
+  componentWillUpdate() {}
 
   render() {
     const ingredientSummary = Object.keys(this.props.ingredients).map(igKey => {
@@ -22,7 +19,7 @@ class OrderSummary extends Component {
     return (
       <Wrapper>
         <h3>Your Order</h3>
-        <p>A delicious burger with the following ingredients:</p>
+        <p>Your order contains:</p>
         <ul>{ingredientSummary}</ul>
         <p>
           <strong>Total Price: {this.props.price.toFixed(2)}</strong>
