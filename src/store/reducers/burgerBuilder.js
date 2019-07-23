@@ -3,7 +3,8 @@ import * as ACTIONS from "../actions/actions";
 const initialState = {
   ingredients: null,
   price: 0,
-  error: false
+  error: false,
+  building: false
 };
 
 const INGREDIENT_PRICES = { salad: 0.5, cheese: 0.5, meat: 0.3, bacon: 2 };
@@ -17,7 +18,8 @@ const burgerReducer = (state = initialState, action) => {
           ...state.ingredients,
           [action.ingredientName]: state.ingredients[action.ingredientName] + 1
         },
-        price: state.price + INGREDIENT_PRICES[action.ingredientName]
+        price: state.price + INGREDIENT_PRICES[action.ingredientName],
+        building: true
       };
 
     case ACTIONS.REMOVE_INGREDIENT:
@@ -27,7 +29,8 @@ const burgerReducer = (state = initialState, action) => {
           ...state.ingredients,
           [action.ingredientName]: state.ingredients[action.ingredientName] - 1
         },
-        price: state.price + INGREDIENT_PRICES[action.ingredientName]
+        price: state.price + INGREDIENT_PRICES[action.ingredientName],
+        building: true
       };
 
     case ACTIONS.SET_INGREDIENTS:
@@ -40,7 +43,8 @@ const burgerReducer = (state = initialState, action) => {
           meat: action.ingredients.meat
         },
         error: false,
-        price: initialState.price
+        price: initialState.price,
+        building: false
       };
 
     case ACTIONS.FETCH_INGREDIENTS_FAILED:
