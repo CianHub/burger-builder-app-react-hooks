@@ -5,6 +5,7 @@ import styles from "../auth/auth.module.css";
 import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
 import Spinner from "../../components/ui/spinner/spinner";
+import { Redirect } from "react-router-dom";
 
 class Authentication extends Component {
   state = {
@@ -36,6 +37,12 @@ class Authentication extends Component {
     },
     isSignUp: true
   };
+
+  componentDidMount() {
+    if (!this.props.building && this.props.authRedirectPath !== "/") {
+      this.props.onSetAuthRedirectPath();
+    }
+  }
 
   switchAuthMode = () => {
     this.setState(prevState => {
@@ -136,11 +143,16 @@ class Authentication extends Component {
       <p style={{ color: "red" }}>{this.props.error.message}</p>
     ) : null;
 
+    let redirectUser = null;
+    if (this.props.isAuthenticated) {
+      console.log(this.props.authRedirectPath);
+      redirectUser = <Redirect to={this.props.authRedirectPath} />;
+    }
     return (
       <div className={styles.Auth}>
+        {redirectUser}
         {errorMsg}
         {form}
-
         <Button btnType="Danger" clicked={this.switchAuthMode}>
           SWITCH TO {this.state.isSignUp ? "LOGIN" : "REGISTER"}
         </Button>
@@ -152,14 +164,18 @@ class Authentication extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     auth: (email, password, isSignUp) =>
-      dispatch(actions.auth(email, password, isSignUp))
+      dispatch(actions.auth(email, password, isSignUp)),
+    onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath("/"))
   };
 };
 
 const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
-    error: state.auth.error
+    error: state.auth.error,
+    isAuthenticated: state.auth.token !== null,
+    building: state.burgerBuilder.building,
+    authRedirectPath: state.auth.authRedirectPath
   };
 };
 
