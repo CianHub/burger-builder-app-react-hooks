@@ -64,7 +64,6 @@ class BurgerBuilder extends Component {
     ) : (
       <Spinner />
     );
-    console.log(this.props);
 
     if (this.props.ings) {
       burger = (
