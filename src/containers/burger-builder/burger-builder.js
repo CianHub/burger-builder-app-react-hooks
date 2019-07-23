@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import { instance } from "../../axios-orders";
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
   state = {
     purchaseable: false,
     purchasing: false
