@@ -21,7 +21,6 @@ const authReducer = (state = initialState, action) => {
         userId: action.localId
       };
     case actions.AUTH_FAIL:
-      console.log(action.error);
       return {
         ...state,
         error: action.error,
@@ -30,7 +29,6 @@ const authReducer = (state = initialState, action) => {
     case actions.LOGOUT:
       return { ...state, token: null, userId: null };
     case actions.SET_AUTH_REDIRECT:
-      console.log(action.path);
       return { ...state, authRedirectPath: action.path };
     default:
       return { ...state };

@@ -145,7 +145,6 @@ class Authentication extends Component {
 
     let redirectUser = null;
     if (this.props.isAuthenticated) {
-      console.log(this.props.authRedirectPath);
       redirectUser = <Redirect to={this.props.authRedirectPath} />;
     }
     return (
