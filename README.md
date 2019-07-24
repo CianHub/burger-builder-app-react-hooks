@@ -7,4 +7,4 @@ This project was built as a way of learning and practicing React, Redux and Reac
 The live project was deployed with Firebase hosting and can be found at: https://react-project-490d2.firebaseapp.com/
 
 ### Installation
-The project can be instll by cloning the repo, NPM install the package.json file, creating a .env file to the root and adding an environmental variable called REACT_API_KEY containing your Firebase API key.
+The project can be instll by cloning the repository, running NPM install on the package.json file, creating a .env file to the root and adding an environmental variable called REACT_API_KEY containing your Firebase API key.
